@@ -43,8 +43,11 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 	mov   wc.lpfnWndProc, OFFSET WndProc
 	mov   wc.cbClsExtra,NULL
 	mov   wc.cbWndExtra,NULL
-	push  hInst
-	pop   wc.hInstance
+;	push  hInst
+;	pop   wc.hInstance
+	mov edx, hInst
+	mov wc.hInstance, edx
+;forbidden	mov   wc.hInstance, hInst
 	mov   wc.hbrBackground,COLOR_WINDOW+1
 	mov   wc.lpszMenuName,OFFSET MenuName
 	mov   wc.lpszClassName,OFFSET ClassName
