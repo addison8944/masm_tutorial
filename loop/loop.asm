@@ -1,6 +1,12 @@
-include \masm32\include\masm32rt.inc
-include \masm32\include\debug.inc
-includelib \masm32\lib\debug.lib
+.386
+.model flat,stdcall
+option casemap:none
+
+ExitProcess proto :DWORD
+StdOut proto :DWORD
+
+includelib c:\masm32\lib\masm32.lib
+includelib c:\masm32\lib\kernel32.lib
 
 JLGDebug macro message
 	local szText
@@ -16,12 +22,12 @@ endm
 
 .code
 start:
-	JLGDebug "Start(xor)"
+;	JLGDebug "Start(mov)"
 	mov ecx, 2000000000
 myloop:
-;	xor eax, eax
-	mov eax, 0
-	loop myloop
-	JLGDebug "End"
+;		xor eax, eax
+		mov eax, 0             ;1
+		loop myloop            ;6
+;	JLGDebug "End"
 	invoke ExitProcess, 0
 end start
