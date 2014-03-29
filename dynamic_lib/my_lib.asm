@@ -1,5 +1,5 @@
 .386
-.model flat,stdcall
+.model flat,c
 option casemap:none
 
 StdOut       PROTO STDCALL :DWORD
@@ -14,12 +14,12 @@ gEndLine db 13, 10, 0
 
 .code
 
-MyJLGDLLEntryPoint proc hInstDLL:DWORD, reason:DWORD, unused:DWORD
+MyJLGDLLEntryPoint PROC STDCALL hInstDLL:DWORD, reason:DWORD, unused:DWORD
 	mov eax, 1
 	ret
 MyJLGDLLEntryPoint endp
 
-Hello proc message:DWORD
+Hello PROC message:DWORD
 	invoke StdOut, addr gHello
 	invoke StdOut, message
 	invoke StdOut, addr gEndLine
