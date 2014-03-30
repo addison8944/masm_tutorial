@@ -2,3 +2,4 @@ LIBRARY my_lib.dll
 
 EXPORTS
 	Hello
+	Hello2

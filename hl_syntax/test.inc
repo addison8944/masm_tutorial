@@ -1,0 +1,2 @@
+TestWhile             PROTO STDCALL
+

@@ -26,4 +26,6 @@ Hello PROC message:DWORD
 	ret
 Hello endp
 
+include my_other_lib.asm
+
 End MyJLGDLLEntryPoint

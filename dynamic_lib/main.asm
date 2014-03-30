@@ -3,6 +3,7 @@
 option casemap:none
 
 Hello             PROTO C :DWORD
+Hello2            PROTO C :DWORD
 ExitProcess       PROTO :DWORD
 
 includelib my_lib.lib
@@ -15,5 +16,6 @@ gName db "Jean-Louis ", 0
 .code
 start:
 	invoke Hello, addr gName
+	invoke Hello2, addr gName
 	invoke ExitProcess, 0
 end start
