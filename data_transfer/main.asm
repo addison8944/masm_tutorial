@@ -1,8 +1,8 @@
 include \masm32\include\masm32rt.inc
 
-my_printf MACRO format:REQ, args:VARARG
+my_printf MACRO args:VARARG
 	pushad
-	printf format, args
+	printf args
 	popad
 ENDM
 
@@ -62,8 +62,80 @@ start:
 	show_reg "edx", edx
 	show_reg "my_var", my_var
 
+	; MOVZX
+	my_printf("MOVZX Example (operand with different size)\n");
+	mov eax, -1
+	mov ebx, -1
+	mov bx, 32h
+	show_reg "eax", eax
+	show_reg "ebx", ebx
+	my_printf("movzx eax, bx\n");
+	movzx eax, bx
+	show_reg "eax", eax
 
 
+	; MOVSX
+	my_printf("MOVSX Example (operand with different size)\n");
+	mov eax, -1
+	mov ebx, -1
+	mov bx, 32h
+	show_reg "eax", eax
+	show_reg "ebx", ebx
+	my_printf("movsx eax, bx\n");
+	movsx eax, bx
+	show_reg "eax", eax
+
+
+	; MOVSB
+	my_printf("MOVSB Example (memcopy)\n");
+.data
+	my_str db "Hello", 0
+.data?
+	mystr2 db 6 dup (?)
+.code
+	mov esi, offset my_str
+	mov edi, offset mystr2
+	cld               ; clear direction flag (forward)
+	mov ecx,6
+	rep movsb         ; copy six times
+	my_printf("mystr2=%s\n", offset mystr2);
+
+	; MOVSW
+.data
+	str3 db "aAbBcCdDeE", 0
+.data?
+	str3c db 10 dup (?)
+.code
+	mov esi, offset str3
+	mov edi, offset str3c
+	cld
+	mov ecx,5
+	rep movsw
+	my_printf("str3c=%s\n", offset str3c);
+
+	; MOVSD
+.data
+	str4 db "123412341234", 0
+.data?
+	str4c db 12 dup (?)
+.code
+	mov esi, offset str4
+	mov edi, offset str4c
+	cld
+	mov ecx,3
+	rep movsd
+	my_printf("str4c=%s\n", offset str4c);
+
+
+	; LEA Example
+	my_printf("LEA Example\n");
+	mov ebx, 1
+	mov ecx, 2
+	lea eax, [ebx+16*ecx+2]
+	show_reg "eax", eax
+
+;	show that xchg with var take far more long than with register.
+;	because of the lock of the bus.
 ;	mov eax, 0
 ;	mov edx, 0
 ;	mov ebx, 3
