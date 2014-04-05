@@ -131,8 +131,30 @@ start:
 	my_printf("LEA Example\n");
 	mov ebx, 1
 	mov ecx, 2
-	lea eax, [ebx+16*ecx+2]
+	lea eax, [ebx+8*ecx+2]
 	show_reg "eax", eax
+
+
+	; XLAT
+.data
+	str5 db 50 dup ("guenego123"), 0
+.data?
+	str5c db 501 dup (?)
+.code
+	my_printf("XLAT test\n");
+	my_printf("str5=\n%s\n", offset str5);
+	mov ecx, 0
+	mov ebx, offset str5
+	mov esi, 0
+	.WHILE ecx < 501
+		mov eax, ecx
+		xlat str5
+		mov [offset str5c + esi], eax
+		inc esi
+		inc ecx
+	.ENDW
+	my_printf("str5c=\n%s\n", offset str5c);
+
 
 ;	show that xchg with var take far more long than with register.
 ;	because of the lock of the bus.
