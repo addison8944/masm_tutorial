@@ -155,6 +155,16 @@ start:
 	.ENDW
 	my_printf("str5c=\n%s\n", offset str5c);
 
+	; LAHF
+	my_printf("LAHF test\n");
+	pushfd
+	mov eax, [esp]
+	and eax, 000000ffh
+	show_reg "eax", eax
+	xor eax, eax
+	popfd
+	lahf
+	show_reg "eax", eax
 
 ;	show that xchg with var take far more long than with register.
 ;	because of the lock of the bus.
