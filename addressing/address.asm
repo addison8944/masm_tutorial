@@ -9,6 +9,7 @@ ENDM
 
 .data
 	byte_tbl db 02h,0B3h,16h,22h, 23h, 24h ; Table of bytes
+	word_tbl dw 02h,0B3h,16h,22h, 23h, 24h ; Table of bytes
 
 .data?
 	my_var DWORD ?
@@ -35,9 +36,16 @@ start:
 	; DIRECT MEMORY ADDRESSING
 	; ------------------------
 	; mov var content
+	printf("Direct Memory addressing\n");
 	mov eax, -1
 	mov al, byte_tbl[1]
 	show_reg "eax", eax
+
+	; same with word_tbl
+	mov eax, -1
+	mov ax, word_tbl[1]
+	show_reg "eax", eax
+
 
 	; mov var content (byte_tbl = byte_tbl[0])
 	mov eax, -1
@@ -97,7 +105,7 @@ start:
 	mov eax, -1
 	mov ebx, 00401000h
 	mov ecx, 1
-	mov eax, word ptr [ebx + ecx + 5]
+	mov eax, dword ptr [ebx + ecx + 5]
 	show_reg "eax", eax
 
 
