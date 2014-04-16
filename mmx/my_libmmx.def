@@ -1,0 +1,4 @@
+LIBRARY my_libmmx.dll
+
+EXPORTS
+	add_array

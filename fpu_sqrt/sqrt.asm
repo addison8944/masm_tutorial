@@ -86,7 +86,15 @@ start:
 	show_fpu_status
 	fadd
 	show_fpu_status
-	fst z
+	fstp z
+	show_fpu_status
+	my_printf("z=0x%I64x\n", z);
+	my_printf("z=%f\n", z);
+
+	; store 2 in st0
+	fld y
+	fsqrt
+	fstp z
 	my_printf("z=0x%I64x\n", z);
 	my_printf("z=%f\n", z);
 

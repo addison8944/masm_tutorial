@@ -1,0 +1,4 @@
+LIBRARY my_libasm.dll
+
+EXPORTS
+	add_array
