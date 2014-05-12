@@ -36,7 +36,7 @@ finish:
 	hlt
 	jmp finish
 msg:
-	db "Hello Yannis OS!",13,10,0
+	db "Hello SUPER OS!",13,10,0
 
 	org 510
 	signature dw 0AA55h
