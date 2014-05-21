@@ -8,5 +8,15 @@ all:
 	#genisoimage -J -R -o boot.iso -b boot.img iso_content
 	mkisofs -J -R -o boot.iso -b boot.img iso_content
 
+	# No emulation
+	mkdir -p iso_content2
+	cp boot.com iso_content2/boot.com
+	mkisofs -J -R -o boot2.iso -b boot.com -no-emul-boot iso_content2
+
+	# Hard drive
+	mkdir -p iso_content3
+	cp boot.com iso_content3/boot.com
+	mkisofs -J -R -o boot3.iso -b boot.com -hard-disk-boot iso_content3
+
 clean:
-	rm -rf *.iso *.o *.com *.exe *.map *.obj iso_content *.img
+	rm -rf *.iso *.o *.com *.exe *.map *.obj iso_content* *.img

@@ -38,7 +38,10 @@ finish:
 msg:
 	db "Hello SUPER OS!",13,10,0
 
-	org 510
+	org 1beh
+	p1 db 80h, 01h,01h,00h, 07h, 01h,01h,00h, 00h,08h,00h,00h,00h,60h,6fh,74h
+
+	org 1feh
 	signature dw 0AA55h
 
 END
