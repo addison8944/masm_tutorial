@@ -1,4 +1,4 @@
-MASM32_ROOT=${DRIVE_C}/masm32
+MASM32_ROOT=C:/masm32
 NAME=stack
 
 SOURCES = $(wildcard *.asm *.rc)
