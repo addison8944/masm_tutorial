@@ -1,0 +1,16 @@
+# Autotools
+*.log
+*.scan
+*.tar.gz
+*~
+*.exe
+*.i
+*.o
+*.a
+*.la
+*.dll
+*.lo
+*.lib
+*.obj
+*.RES
+Edit.*
