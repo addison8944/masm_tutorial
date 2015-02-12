@@ -9,7 +9,7 @@ ENDM
 
 .data
 	byte_tbl db 02h,0B3h,16h,22h, 23h, 24h ; Table of bytes
-	word_tbl dw 02h,0B3h,16h,22h, 23h, 24h ; Table of bytes
+	word_tbl dw 02h,0B3h,16h,22h, 23h, 24h ; Table of word
 
 .data?
 	my_var DWORD ?
@@ -43,6 +43,7 @@ start:
 
 	; same with word_tbl
 	mov eax, -1
+	; warning: little endian
 	mov ax, word_tbl[1]
 	show_reg "eax", eax
 
@@ -75,6 +76,7 @@ start:
 	; REGISTRY ADDRESSING
 	; -------------------
 	; mov memory content
+	printf("Registry addressing\n");
 	mov eax, -1
 	mov ebx, 00401000h
 	mov eax, ebx

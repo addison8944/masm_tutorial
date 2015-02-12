@@ -1,4 +1,4 @@
-MASM32_ROOT=${DRIVE_C}/masm32
+MASM32_ROOT=C:/masm32
 SUBSYSTEM=CONSOLE
 NAME=main
 
@@ -22,3 +22,8 @@ $(NAME).exe: $(OBJS)
 
 clean:
 	rm -f *exe *obj *res
+
+dis: disassemble
+
+disassemble:
+	objdump -S -M intel $(NAME).exe
