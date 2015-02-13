@@ -1,32 +1,24 @@
 include \masm32\include\masm32rt.inc
 
-show_esp MACRO n
-	mov my_esp, esp
-	printf("my_esp(%d)=0x%08x\n", n, my_esp);
-ENDM
-
 get_flags MACRO
-	;show_esp 1
 	pushfd
-	;show_esp 2
-	mov eax, 0
-	mov eax, [esp]
-	mov flags, eax
-	;show_esp 3
-	popfd
-	;show_esp 4
+	pop eax
+	mov my_flags, eax
 ENDM
 
 show_flags MACRO f, p_mask
 	cld
-	mov eax, flags
+	mov eax, my_flags
 	and eax, p_mask
+	.IF eax != 0
+		mov eax, 1
+	.ENDIF
 	mov my_eax, eax
 	printf("%s=0x%08X (%i)\n", f, my_eax, my_eax);
 ENDM
 
 show_add_CF MACRO v1, v2
-	printf("Checking carry flag.\n");
+	printf("\nChecking carry flag.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -40,7 +32,7 @@ show_add_CF MACRO v1, v2
 ENDM
 
 show_sub_CF MACRO v1, v2
-	printf("Checking carry flag.\n");
+	printf("\nChecking carry flag.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -54,7 +46,7 @@ show_sub_CF MACRO v1, v2
 ENDM
 
 show_add_PF MACRO v1, v2
-	printf("Checking parity flag.\n");
+	printf("\nChecking parity flag.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -68,7 +60,7 @@ show_add_PF MACRO v1, v2
 ENDM
 
 show_add_AF MACRO v1, v2
-	printf("Checking adjust flag (BCD).\n");
+	printf("\nChecking adjust flag (BCD).\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -83,7 +75,7 @@ show_add_AF MACRO v1, v2
 ENDM
 
 show_add_ZF MACRO v1, v2
-	printf("Checking Zero Flag.\n");
+	printf("\nChecking Zero Flag.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -97,7 +89,7 @@ show_add_ZF MACRO v1, v2
 ENDM
 
 show_add_SF MACRO v1, v2
-	printf("Checking Sign Flag.\n");
+	printf("\nChecking Sign Flag.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -111,13 +103,13 @@ show_add_SF MACRO v1, v2
 ENDM
 
 show_TF MACRO
-	printf("Checking Trap Flag.\n");
+	printf("\nChecking Trap Flag.\n");
 	get_flags
 	show_flags "TF", 100h
 ENDM
 
 show_IF MACRO
-	printf("Checking Interrupt Flag.\n");
+	printf("\nChecking Interrupt Flag.\n");
 	get_flags
 	show_flags "IF", 200h
 ENDM
@@ -125,12 +117,12 @@ ENDM
 show_DF MACRO
 	get_flags
 	cld
-	printf("Checking Direction Flag.\n");
+	printf("\nChecking Direction Flag.\n");
 	show_flags "DF", 400h
 ENDM
 
 show_add_OF MACRO v1, v2
-	printf("Checking overflow flag with add.\n");
+	printf("\nChecking overflow flag with add.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -144,7 +136,7 @@ show_add_OF MACRO v1, v2
 ENDM
 
 show_sub_OF MACRO v1, v2
-	printf("Checking overflow flag with sub.\n");
+	printf("\nChecking overflow flag with sub.\n");
 	mov a, v1
 	mov b, v2
 	mov eax, v1
@@ -158,44 +150,44 @@ show_sub_OF MACRO v1, v2
 ENDM
 
 show_iopl MACRO
-	printf("Checking IOPL flags.\n");
+	printf("\nChecking IOPL flags.\n");
 	get_flags
 	show_flags "IOPL1", 1000h
 	show_flags "IOPL2", 2000h
 ENDM
 
 show_nt MACRO
-	printf("Checking Nested Task flags.\n");
+	printf("\nChecking Nested Task flags.\n");
 	get_flags
 	show_flags "NT", 4000h
 ENDM
 
 show_vm MACRO
-	printf("Checking Virtual-8086 mode flags.\n");
+	printf("\nChecking Virtual-8086 mode flags.\n");
 	get_flags
 	show_flags "VM", 8000h
 ENDM
 
 show_ac MACRO
-	printf("Checking Alignment Check flags.\n");
+	printf("\nChecking Alignment Check flags.\n");
 	get_flags
 	show_flags "AC", 10000h
 ENDM
 
 show_vif MACRO
-	printf("Checking Virtual Interrupt flags.\n");
+	printf("\nChecking Virtual Interrupt flags.\n");
 	get_flags
 	show_flags "VIF", 20000h
 ENDM
 
 show_vip MACRO
-	printf("Checking Virtual Interrupt Pending flags.\n");
+	printf("\nChecking Virtual Interrupt Pending flags.\n");
 	get_flags
 	show_flags "VIP", 40000h
 ENDM
 
 show_id MACRO
-	printf("Checking CPU Identification flags.\n");
+	printf("\nChecking CPU Identification flags.\n");
 	get_flags
 	show_flags "ID", 80000h
 ENDM
@@ -203,7 +195,7 @@ ENDM
 .data?
 	my_esp DWORD ?
 	my_eax DWORD ?
-	flags DWORD ?
+	my_flags DWORD ?
 	a DWORD ?
 	b DWORD ?
 	r DWORD ?
