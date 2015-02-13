@@ -48,12 +48,13 @@ ENDM
 	my_cycle dq 0
 	a dq 123456789123456789
 	b dq 123456789123456790
-	result dq 0
+	result QWORD 0
 .code
 start:
 	long_minus result, a, b
 	timer_reset
-	xor eax, eax
+	;xor eax, eax
+	mov eax, 0
 	timer_cycle
 	invoke ExitProcess,0
 end start

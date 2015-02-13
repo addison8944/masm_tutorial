@@ -1,5 +1,7 @@
-MASM32_ROOT=${DRIVE_C}/masm32
-NAME=hello
+MASM32_ROOT=C:/masm32
+SUBSYSTEM=CONSOLE
+NAME=main
+
 
 SOURCES = $(wildcard *.asm *.rc)
 OBJS = $(patsubst %.asm,%.obj,$(patsubst %.rc,%.RES,$(SOURCES)))
@@ -10,13 +12,13 @@ $(NAME): $(NAME).exe
 
 
 $(NAME).exe: $(OBJS)
-	$(MASM32_ROOT)/bin/link.exe //SUBSYSTEM:CONSOLE //LIBPATH:"C:\\masm32\\lib" *.obj *.RES
+	$(MASM32_ROOT)/bin/link.exe //SUBSYSTEM:$(SUBSYSTEM) //LIBPATH:"C:\\masm32\\lib" //OUT:$(NAME).exe *.obj *.res
 
 %.obj: %.asm
 	$(MASM32_ROOT)/bin/ml.exe //c //coff //Cp $<
 
-%.RES: %.rc
+%.res: %.rc
 	$(MASM32_ROOT)/bin/rc.exe $<
 
 clean:
-	rm -f *exe *obj *RES
+	rm -f *exe *obj *res

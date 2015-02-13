@@ -5,7 +5,6 @@ include test.inc
 gLoopMessage db "Doing a loop...",13, 10, 0
 
 .code
-;mon_label:
 	TestWhile PROC
 		LOCAL my_eax:DWORD
 		printf("WHILE Example:\n")
