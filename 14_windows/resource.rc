@@ -13,4 +13,11 @@ FirstMenu MENU
          MENUITEM "E&xit",IDM_EXIT
         }
  MENUITEM "&Test", IDM_TEST
+ MENUITEM "&Juan", IDM_TEST
+ POPUP "&PopUp"
+        {
+         MENUITEM "&Say truc",IDM_HELLO
+         MENUITEM SEPARATOR
+         MENUITEM "E&xit",IDM_EXIT
+        }
 }

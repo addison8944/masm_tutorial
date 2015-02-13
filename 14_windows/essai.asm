@@ -1,7 +1,9 @@
 .386
 .model flat,stdcall
 option casemap:none
+
 WinMain proto :DWORD,:DWORD,:DWORD,:DWORD
+
 include \masm32\include\windows.inc
 include \masm32\include\user32.inc
 include \masm32\include\kernel32.inc
