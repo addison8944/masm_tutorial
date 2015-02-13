@@ -17,5 +17,5 @@ start:
 		inc my_counter
 		add my_line_counter, 1
 	.ENDW
-	ret
+	invoke ExitProcess, 0
 END start
