@@ -1,8 +1,10 @@
 include \masm32\include\masm32rt.inc
 
 show_reg MACRO my_string, my_register
+	push eax
 	mov my_var, my_register
 	printf("%sxx=0x%08x\n", my_string, my_register);
+	pop eax
 ENDM
 
 .data?

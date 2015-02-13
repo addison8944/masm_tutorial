@@ -13,4 +13,5 @@
 *.lib
 *.obj
 *.RES
+*.dis
 Edit.*

@@ -5,10 +5,11 @@ include test.inc
 gMessage db "Hello World ",13, 10, 0
 
 .code
-start:
+startx:
 	; Example of IF THEN ELSE
 	printf("IF THEN ELSE Example:\n")
 	invoke crt_printf, addr gMessage
+	xor eax, eax
 	mov eax, 0
 	.IF eax == 23
 		printf("eax is 23\n")
@@ -19,4 +20,4 @@ start:
 	invoke TestWhile
 
 	invoke ExitProcess,0
-end start
+end startx
